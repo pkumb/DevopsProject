@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Build docker file') {
             steps   {
-                sh "docker build -t project-image:ver1 ."
+                sh "docker build -t project-image:B${BUILD_NUMBER} ."
             }
         }
         stage('Test') {
