@@ -8,14 +8,14 @@ pipeline {
                 sh "docker build -t project-image:B${BUILD_NUMBER} ."
             }
         }
-        stage('Test') {
+        stage('Push docker file to dockerhub') {
             steps {
-                echo 'Testing..'
+                sh "docker push pkumb/devops-project:B${BUILD_NUMBER} "
             }
         }
-        stage('Deploy') {
+        stage('Docker run') {
             steps {
-                echo 'Deploying....'
+                sh "docker run -d -p 80:80 project-image:B${BUILD_NUMBER} "
             }
         }
     }
